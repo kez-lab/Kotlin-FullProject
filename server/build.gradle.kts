@@ -1,6 +1,6 @@
 plugins {
     alias(libs.plugins.kotlinJvm)
-    alias(libs.plugins.ktorServer)
+    alias(libs.plugins.ktor)
     application
 }
 

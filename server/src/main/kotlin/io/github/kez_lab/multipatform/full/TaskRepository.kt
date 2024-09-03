@@ -1,5 +1,8 @@
 package io.github.kez_lab.multipatform.full
 
+import io.github.kez_lab.multipatform.full.model.Priority
+import io.github.kez_lab.multipatform.full.model.Task
+
 interface TaskRepository {
     fun allTasks(): List<Task>
     fun tasksByPriority(priority: Priority): List<Task>

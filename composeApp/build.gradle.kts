@@ -53,9 +53,7 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
-            implementation(libs.ktor.client.core)
-            implementation(libs.ktor.client.content.negotiation)
-            implementation(libs.ktor.serialization.kotlinx.json)
+            implementation("io.ktor:ktor-client-android:3.0.0-beta-2")
         }
 
         commonMain.dependencies {

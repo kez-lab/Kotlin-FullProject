@@ -1,5 +1,6 @@
-package io.github.kez_lab.multipatform.full
+package io.github.kez_lab.multipatform.full.network
 
+import io.github.kez_lab.multipatform.full.model.Task
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation

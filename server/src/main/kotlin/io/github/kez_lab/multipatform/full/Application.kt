@@ -1,5 +1,7 @@
 package io.github.kez_lab.multipatform.full
 
+import io.github.kez_lab.multipatform.full.model.Priority
+import io.github.kez_lab.multipatform.full.model.Task
 import io.ktor.http.HttpStatusCode
 import io.ktor.serialization.JsonConvertException
 import io.ktor.serialization.kotlinx.json.json

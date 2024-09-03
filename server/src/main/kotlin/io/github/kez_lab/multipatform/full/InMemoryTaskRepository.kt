@@ -1,5 +1,8 @@
 package io.github.kez_lab.multipatform.full
 
+import io.github.kez_lab.multipatform.full.model.Priority
+import io.github.kez_lab.multipatform.full.model.Task
+
 class InMemoryTaskRepository : TaskRepository {
     private var tasks = listOf(
         Task("Cleaning", "Clean the house", Priority.Low),
