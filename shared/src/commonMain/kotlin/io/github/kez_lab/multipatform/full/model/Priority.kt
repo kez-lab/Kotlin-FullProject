@@ -1,4 +1,4 @@
-package io.github.kez_lab.multipatform.full
+package io.github.kez_lab.multipatform.full.model
 
 import kotlinx.serialization.Serializable
 
