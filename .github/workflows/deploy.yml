@@ -27,5 +27,5 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4.6.3
         with:
           BRANCH: gh-pages
-          FOLDER: compose-web/build/dist/wasmJs/productionExecutable
+          FOLDER: composeApp/build/dist/wasmJs/productionExecutable
           CLEAN: true
