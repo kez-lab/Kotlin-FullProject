@@ -8,7 +8,8 @@ group = "io.github.kez_lab.multipatform.full"
 version = "1.0.0"
 application {
     mainClass.set("io.github.kez_lab.multipatform.full.ApplicationKt")
-    applicationDefaultJvmArgs = listOf("-Dio.ktor.development=${extra["io.ktor.development"] ?: "false"}")
+    applicationDefaultJvmArgs =
+        listOf("-Dio.ktor.development=${extra["io.ktor.development"] ?: "false"}")
 }
 
 dependencies {
@@ -19,4 +20,5 @@ dependencies {
     testImplementation(libs.kotlin.test.junit)
     implementation(libs.ktor.serialization.kotlinx.json.jvm)
     implementation(libs.ktor.server.content.negotiation.jvm)
+    implementation(libs.ktor.server.cors)
 }
