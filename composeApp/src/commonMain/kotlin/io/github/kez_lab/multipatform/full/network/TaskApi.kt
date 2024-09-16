@@ -25,23 +25,35 @@ class TaskApi {
             })
         }
         defaultRequest {
-            host = "1.2.3.4"
-            port = 8080
+            host = "ktor-sample-project-env-2.eba-t3qywkvr.ap-northeast-2.elasticbeanstalk.com"
         }
     }
 
     suspend fun getAllTasks(): List<Task> {
-        return httpClient.get("tasks").body()
+        return try {
+            httpClient.get("tasks").body()
+        } catch (e: Exception) {
+            println("Error fetching tasks: ${e.message}")
+            emptyList()
+        }
     }
 
     suspend fun removeTask(task: Task) {
-        httpClient.delete("tasks/${task.name}")
+        try {
+            httpClient.delete("tasks/${task.name}")
+        } catch (e: Exception) {
+            println("Error removing task: ${e.message}")
+        }
     }
 
     suspend fun updateTask(task: Task) {
-        httpClient.post("tasks") {
-            contentType(ContentType.Application.Json)
-            setBody(task)
+        try {
+            httpClient.post("tasks/${task.name}") {
+                contentType(ContentType.Application.Json)
+                setBody(task)
+            }
+        } catch (e: Exception) {
+            println("Error updating task: ${e.message}")
         }
     }
 }

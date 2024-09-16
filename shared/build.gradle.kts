@@ -45,6 +45,9 @@ kotlin {
             implementation(libs.ktor.serialization.kotlinx.json)
         }
     }
+    jvmToolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
 }
 
 android {

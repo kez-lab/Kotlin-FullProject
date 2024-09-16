@@ -1,15 +1,35 @@
 plugins {
     alias(libs.plugins.kotlinJvm)
     alias(libs.plugins.ktor)
+    id("com.github.johnrengelman.shadow") version "7.1.2"
     application
 }
 
 group = "io.github.kez_lab.multipatform.full"
 version = "1.0.0"
+
 application {
-    mainClass.set("io.github.kez_lab.multipatform.full.ApplicationKt")
-    applicationDefaultJvmArgs =
-        listOf("-Dio.ktor.development=${extra["io.ktor.development"] ?: "false"}")
+    mainClass.set("io.ktor.server.netty.EngineMain")
+
+    val isDevelopment: Boolean = project.ext.has("development")
+    applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
+}
+
+kotlin {
+    jvmToolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven { url = uri("https://maven.pkg.jetbrains.space/public/p/ktor/eap") }
+}
+
+ktor {
+    fatJar {
+        archiveFileName.set("fat.jar")
+    }
 }
 
 dependencies {

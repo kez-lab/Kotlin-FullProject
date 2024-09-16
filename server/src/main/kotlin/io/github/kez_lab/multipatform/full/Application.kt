@@ -9,8 +9,6 @@ import io.ktor.serialization.JsonConvertException
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.Application
 import io.ktor.server.application.install
-import io.ktor.server.engine.embeddedServer
-import io.ktor.server.netty.Netty
 import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.server.plugins.cors.routing.CORS
 import io.ktor.server.request.receive
@@ -21,30 +19,18 @@ import io.ktor.server.routing.post
 import io.ktor.server.routing.route
 import io.ktor.server.routing.routing
 
-fun main() {
-    embeddedServer(
-        Netty, port = SERVER_PORT,
-        host = "0.0.0.0",
-        module = Application::module
-    ).start(wait = true)
+fun main(args: Array<String>) {
+    io.ktor.server.netty.EngineMain.main(args)
 }
 
 fun Application.module() {
-    install(CORS) {
-        allowHost("kez-lab.github.io")
-        allowMethod(HttpMethod.Get)
-        allowMethod(HttpMethod.Post)
-        allowMethod(HttpMethod.Delete)
-        allowHeader(HttpHeaders.ContentType)
-        allowCredentials = false
-    }
-
-    install(ContentNegotiation) {
-        json()
-    }
-
+    configureCors()
+    configureJson()
     val repository = InMemoryTaskRepository()
+    configureRoute(repository)
+}
 
+private fun Application.configureRoute(repository: InMemoryTaskRepository) {
     routing {
         route("/tasks") {
             get {
@@ -79,6 +65,7 @@ fun Application.module() {
                         call.respond(HttpStatusCode.NotFound)
                         return@get
                     }
+
                     call.respond(tasks)
                 } catch (ex: IllegalArgumentException) {
                     call.respond(HttpStatusCode.BadRequest)
@@ -108,5 +95,22 @@ fun Application.module() {
                 }
             }
         }
+    }
+}
+
+private fun Application.configureJson() {
+    install(ContentNegotiation) {
+        json()
+    }
+}
+
+private fun Application.configureCors() {
+    install(CORS) {
+        allowHost("kez-lab.github.io")
+        allowMethod(HttpMethod.Get)
+        allowMethod(HttpMethod.Post)
+        allowMethod(HttpMethod.Delete)
+        allowHeader(HttpHeaders.ContentType)
+        allowCredentials = false
     }
 }
