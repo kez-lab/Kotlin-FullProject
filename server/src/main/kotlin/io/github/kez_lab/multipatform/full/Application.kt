@@ -32,6 +32,12 @@ fun Application.module() {
 
 private fun Application.configureRoute(repository: InMemoryTaskRepository) {
     routing {
+        route("/") {
+            get {
+                call.respond("Hello, Ktor!")
+            }
+        }
+
         route("/tasks") {
             get {
                 val tasks = repository.allTasks()

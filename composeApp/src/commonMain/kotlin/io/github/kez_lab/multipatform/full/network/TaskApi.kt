@@ -25,7 +25,7 @@ class TaskApi {
             })
         }
         defaultRequest {
-            host = "ktor-sample-project-env-2.eba-t3qywkvr.ap-northeast-2.elasticbeanstalk.com"
+            host = "https://ktor-sample-project-env-2.eba-t3qywkvr.ap-northeast-2.elasticbeanstalk.com"
         }
     }
 
