@@ -30,7 +30,7 @@ class TaskApi {
                 protocol = URLProtocol.HTTPS
             }
 
-            host = "Kotlin-Full-Project-env.eba-megq3ctt.ap-northeast-2.elasticbeanstalk.com"
+            host = "kezlab.site"
         }
     }
 
