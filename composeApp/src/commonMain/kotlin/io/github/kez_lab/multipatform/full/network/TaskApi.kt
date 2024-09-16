@@ -53,7 +53,7 @@ class TaskApi {
 
     suspend fun updateTask(task: Task) {
         try {
-            httpClient.post("tasks/${task.name}") {
+            httpClient.post("tasks") {
                 contentType(ContentType.Application.Json)
                 setBody(task)
             }
