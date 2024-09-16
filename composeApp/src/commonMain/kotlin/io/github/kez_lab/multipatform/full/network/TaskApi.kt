@@ -10,6 +10,7 @@ import io.ktor.client.request.get
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
+import io.ktor.http.URLProtocol
 import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
@@ -25,7 +26,11 @@ class TaskApi {
             })
         }
         defaultRequest {
-            host = "https://ktor-sample-project-env-2.eba-t3qywkvr.ap-northeast-2.elasticbeanstalk.com"
+            url {
+                protocol = URLProtocol.HTTPS
+            }
+
+            host = "Kotlin-Full-Project-env.eba-megq3ctt.ap-northeast-2.elasticbeanstalk.com"
         }
     }
 
