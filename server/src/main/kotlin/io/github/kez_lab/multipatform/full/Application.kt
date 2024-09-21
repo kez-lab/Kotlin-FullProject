@@ -110,6 +110,7 @@ private fun Application.configureJson() {
     }
 }
 
+
 private fun Application.configureCors() {
     install(CORS) {
         allowHost("kez-lab.github.io")

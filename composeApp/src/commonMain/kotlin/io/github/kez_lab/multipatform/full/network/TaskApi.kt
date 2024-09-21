@@ -18,12 +18,14 @@ import kotlinx.serialization.json.Json
 class TaskApi {
     private val httpClient = HttpClient {
         install(ContentNegotiation) {
-            json(Json {
-                encodeDefaults = true
-                isLenient = true
-                coerceInputValues = true
-                ignoreUnknownKeys = true
-            })
+            json(
+                Json {
+                    encodeDefaults = true
+                    isLenient = true
+                    coerceInputValues = true
+                    ignoreUnknownKeys = true
+                }
+            )
         }
         defaultRequest {
             url {
@@ -33,6 +35,8 @@ class TaskApi {
             host = "kezlab.site"
         }
     }
+
+
 
     suspend fun getAllTasks(): List<Task> {
         return try {
