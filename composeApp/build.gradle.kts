@@ -1,6 +1,7 @@
+import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
@@ -37,6 +38,8 @@ kotlin {
         }
     }
 
+    jvm("desktop")
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -49,11 +52,11 @@ kotlin {
     }
 
     sourceSets {
-
+        val desktopMain by getting
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
-            implementation("io.ktor:ktor-client-android:3.0.0-beta-2")
+            implementation(libs.ktor.client.android)
         }
 
         commonMain.dependencies {
@@ -72,8 +75,10 @@ kotlin {
             implementation(libs.ktor.serialization.kotlinx.json)
         }
 
-        jsMain.dependencies {
-            implementation("io.ktor:ktor-client-cio:2.3.12")
+        desktopMain.dependencies {
+            implementation(compose.desktop.currentOs)
+            implementation(libs.kotlinx.coroutines.swing)
+            implementation(libs.ktor.client.cio)
         }
 
         iosMain.dependencies {
@@ -119,3 +124,15 @@ android {
     }
 }
 
+
+compose.desktop {
+    application {
+        mainClass = "io.github.kez_lab.multipatform.full.MainKt"
+
+        nativeDistributions {
+            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
+            packageName = "io.github.kez_lab.multipatform.full"
+            packageVersion = "1.0.0"
+        }
+    }
+}
