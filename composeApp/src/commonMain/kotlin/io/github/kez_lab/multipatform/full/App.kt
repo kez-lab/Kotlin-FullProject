@@ -33,12 +33,13 @@ import androidx.compose.ui.window.Dialog
 import io.github.kez_lab.multipatform.full.model.Priority
 import io.github.kez_lab.multipatform.full.model.Task
 import io.github.kez_lab.multipatform.full.network.TaskApi
+import io.github.kez_lab.multipatform.full.network.getHttpClient
 import kotlinx.coroutines.launch
 
 @Composable
 fun App() {
     MaterialTheme {
-        val client = remember { TaskApi() }
+        val client = remember { TaskApi(getHttpClient("kezlab.site")) }
         var tasks by remember { mutableStateOf(emptyList<Task>()) }
         val scope = rememberCoroutineScope()
         var currentTask by remember { mutableStateOf<Task?>(null) }
