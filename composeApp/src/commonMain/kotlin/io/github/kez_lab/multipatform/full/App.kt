@@ -65,7 +65,8 @@ fun App() {
                         tasks = client.getAllTasks()
                     }
                     currentTask = null
-                }
+                },
+                onDismiss = { currentTask = null }
             )
         }
 

@@ -14,7 +14,8 @@ class TaskApi(private val httpClient: HttpClient) {
 
     suspend fun getAllTasks(): List<Task> {
         return try {
-            httpClient.get("tasks").body()
+            val response: List<Task> = httpClient.get("tasks").body()
+            response.sortedByDescending { it.priority.ordinal }
         } catch (e: Exception) {
             println("Error fetching tasks: ${e.message}")
             emptyList()

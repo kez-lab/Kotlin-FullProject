@@ -26,12 +26,13 @@ import io.github.kez_lab.multipatform.full.ui.dropdown.PriorityDropdown
 @Composable
 fun UpdateTaskDialog(
     task: Task,
-    onConfirm: (Task) -> Unit
+    onConfirm: (Task) -> Unit,
+    onDismiss: () -> Unit
 ) {
     var description by remember { mutableStateOf(task.description) }
     var priority by remember { mutableStateOf(task.priority) }
 
-    Dialog(onDismissRequest = {}) {
+    Dialog(onDismissRequest = { onDismiss() }) {
         Card(
             modifier = Modifier.fillMaxWidth().padding(4.dp),
             shape = RoundedCornerShape(CornerSize(4.dp))
@@ -62,7 +63,7 @@ fun UpdateTaskDialog(
                         )
                         onConfirm(updatedTask)
                     },
-                    onDismiss = {}
+                    onDismiss = onDismiss
                 )
             }
         }
